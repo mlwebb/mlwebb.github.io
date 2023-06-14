@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.css"/>
+  <link rel="stylesheet" href="./style.css">
+
+  <style>html,
+    body {
+      height: 100%;
+    }
+    
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    input {
+      width: 200px;
+      height: 40px;
+    }
+    
+    #success_message {
+      display: none;
+    }
+    </style>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.js"></script>
+  
+  <script type="text/javascript">
+"use strict";
+let url =
+  "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeDKdvIB_eSAUXAKhDzg1PDQ4XmZj7lIYa7HxqgKjJdmybIFA/formResponse"; //action url
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const token = urlParams.get("token");
+const enc_token = token !== null ? fEncode(token): "no token"
+//console.log(enc_token);
+
+function getUserLocData() {
+  return fetch("https://ipinfo.io/json?token=85e83e79c022cc")
+    .then((response) => response.json());
+}
+
+let ipUser, ipCity, ipRegion, ipCountry, ipLoc, ipOrg, ipPostal, ipTimezone, jsonString;
+
+getUserLocData()
+  .then((jsonResponse) => {
+    ipUser = jsonResponse.ip;
+    ipCity = jsonResponse.city;
+    ipRegion = jsonResponse.region;
+    ipCountry = jsonResponse.country;
+    ipLoc = jsonResponse.loc;
+    ipOrg = jsonResponse.org;
+    ipPostal = jsonResponse.postal;
+    ipTimezone = jsonResponse.timezone;
+    jsonString = JSON.stringify(jsonResponse);
+
+    //console.log(jsonString);
+    return jsonString
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+// You can access the `jsonString` variable here
+console.log(jsonString);
+
+function getInputData() {
+  let dataToPost = new FormData(); //formdata API
+
+  //fill name attributes to corresponding values
+  dataToPost.append(
+    "entry.1031659946",
+    document.getElementById("company_name").value
+  );
+  dataToPost.append(
+    "entry.925678154",
+    document.getElementById("contact_name").value
+  );
+  dataToPost.append("entry.1629060762", document.getElementById("email").value);
+  dataToPost.append("entry.1863658209", document.getElementById("phone").value);
+  dataToPost.append(
+    "entry.1999290306",
+    document.getElementById("address").value
+  );
+  dataToPost.append("entry.942937469", document.getElementById("city").value);
+  dataToPost.append("entry.1859032765", document.getElementById("state").value);
+  dataToPost.append("entry.1704545811", document.getElementById("zip").value);
+  dataToPost.append("entry.306946749", enc_token);
+  dataToPost.append("entry.1302095488", ipUser);
+
+  return dataToPost;
+}
+
+function fEncode(vValue) {
+  var Base64 = {
+    _keyStr:
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+    encode: function (e) {
+      var t = "";
+      var n, r, i, s, o, u, a;
+      var f = 0;
+      e = Base64._utf8_encode(e);
+      while (f < e.length) {
+        n = e.charCodeAt(f++);
+        r = e.charCodeAt(f++);
+        i = e.charCodeAt(f++);
+        s = n >> 2;
+        o = ((n & 3) << 4) | (r >> 4);
+        u = ((r & 15) << 2) | (i >> 6);
+        a = i & 63;
+        if (isNaN(r)) {
+          u = a = 64;
+        } else if (isNaN(i)) {
+          a = 64;
+        }
+        t =
+          t +
+          this._keyStr.charAt(s) +
+          this._keyStr.charAt(o) +
+          this._keyStr.charAt(u) +
+          this._keyStr.charAt(a);
+      }
+      return t;
+    },
+    decode: function (e) {
+      var t = "";
+      var n, r, i;
+      var s, o, u, a;
+      var f = 0;
+      e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+      while (f < e.length) {
+        s = this._keyStr.indexOf(e.charAt(f++));
+        o = this._keyStr.indexOf(e.charAt(f++));
+        u = this._keyStr.indexOf(e.charAt(f++));
+        a = this._keyStr.indexOf(e.charAt(f++));
+        n = (s << 2) | (o >> 4);
+        r = ((o & 15) << 4) | (u >> 2);
+        i = ((u & 3) << 6) | a;
+        t = t + String.fromCharCode(n);
+        if (u != 64) {
+          t = t + String.fromCharCode(r);
+        }
+        if (a != 64) {
+          t = t + String.fromCharCode(i);
+        }
+      }
+      t = Base64._utf8_decode(t);
+      return t;
+    },
+    _utf8_encode: function (e) {
+      e = e.replace(/\r\n/g, "\n");
+      var t = "";
+      for (var n = 0; n < e.length; n++) {
+        var r = e.charCodeAt(n);
+        if (r < 128) {
+          t += String.fromCharCode(r);
+        } else if (r > 127 && r < 2048) {
+          t += String.fromCharCode((r >> 6) | 192);
+          t += String.fromCharCode((r & 63) | 128);
+        } else {
+          t += String.fromCharCode((r >> 12) | 224);
+          t += String.fromCharCode(((r >> 6) & 63) | 128);
+          t += String.fromCharCode((r & 63) | 128);
+        }
+      }
+      return t;
+    },
+    _utf8_decode: function (e) {
+      var t = "";
+      var n = 0;
+      var r, c1, c2, c3; // Define c1, c2, and c3 here
+      while (n < e.length) {
+        r = e.charCodeAt(n);
+        if (r < 128) {
+          t += String.fromCharCode(r);
+          n++;
+        } else if (r > 191 && r < 224) {
+          c2 = e.charCodeAt(n + 1);
+          t += String.fromCharCode(((r & 31) << 6) | (c2 & 63));
+          n += 2;
+        } else {
+          c2 = e.charCodeAt(n + 1);
+          c3 = e.charCodeAt(n + 2);
+          t += String.fromCharCode(
+            ((r & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63)
+          );
+          n += 3;
+        }
+      }
+      return t;
+    },
+  };
+  // var encodedString = Base64.encode(vValue);
+   var decodedString = Base64.decode(vValue);
+  // var _utf8_encodedString = Base64.decode(vValue);
+  // var _utf8_decodedString = Base64.decode(vValue);
+  return decodedString;
+}
+
+function final_Submit() {
+  fetch(url, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: getInputData(),
+  })
+    .then((response) => {
+      console.log("Information Submitted awaiting response");
+      console.log(response);
+      //   alert("Thank you for submitting your information.");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+$(document).ready(function () {
+  $("#contact_form")
+    .bootstrapValidator({
+      // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+      feedbackIcons: {
+        valid: "glyphicon glyphicon-ok",
+        invalid: "glyphicon glyphicon-remove",
+        validating: "glyphicon glyphicon-refresh",
+      },
+      fields: {
+        // field validations go here
+        company_name: {
+          validators: {
+            stringLength: {
+              min: 2,
+            },
+            notEmpty: {
+              message: "Please supply your first name",
+            },
+          },
+        },
+        contact_name: {
+          validators: {
+            stringLength: {
+              min: 2,
+            },
+            notEmpty: {
+              message: "Please supply your last name",
+            },
+          },
+        },
+        email: {
+          validators: {
+            notEmpty: {
+              message: "Please supply your email address",
+            },
+            emailAddress: {
+              message: "Please supply a valid email address",
+            },
+          },
+        },
+        phone: {
+          validators: {
+            notEmpty: {
+              message: "Please supply your phone number",
+            },
+            phone: {
+              country: "US",
+              message: "Please supply a vaild phone number with area code",
+            },
+          },
+        },
+        address: {
+          validators: {
+            stringLength: {
+              min: 8,
+            },
+            notEmpty: {
+              message: "Please supply your street address",
+            },
+          },
+        },
+        city: {
+          validators: {
+            stringLength: {
+              min: 4,
+            },
+            notEmpty: {
+              message: "Please supply your city",
+            },
+          },
+        },
+        state: {
+          validators: {
+            notEmpty: {
+              message: "Please select your state",
+            },
+          },
+        },
+        zip: {
+          validators: {
+            notEmpty: {
+              message: "Please supply your zip code",
+            },
+            zipCode: {
+              country: "US",
+              message: "Please supply a vaild zip code",
+            },
+          },
+        },
+      },
+    })
+    .on("success.form.bv", function (e) {
+      $("#success_message").slideDown({ opacity: "show" }, "slow");
+      // Prevent form submission
+      e.preventDefault();
+      // Get the form instance
+      var $form = $(e.target);
+      // Get the BootstrapValidator instance
+      var bv = $form.data("bootstrapValidator");
+      // Use Ajax to submit form data
+      final_Submit();
+      // Reset the form after submission
+      bv.resetForm();
+      // Hide the success message after a delay
+      //$('#submit'). prop('disabled', true)
+      setTimeout(function () {
+        $("#success_message").slideUp({ opacity: "hide" }, "slow");
+      }, 5000);
+    });
+});
+
+
+  </script>
+  <title id ="1">UCI Payment Plus Form</title>
+</head>
+
+<body>  
+  <div class="container">
+
+    <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+  <fieldset>
+  
+  <!-- Form Name -->
+  <legend>UCI Payment Plus Form</legend>
+  
+  <!-- Text input-->
+  
+  <div class="form-group">
+  <label class="col-md-4 control-label">Company Name</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="company_name" datatext="company_name" placeholder="Company Name" class="form-control"  type="text" id="company_name">
+    </div>
+  </div>
+  </div>
+  
+  <!-- Text input-->
+  
+  <div class="form-group">
+  <label class="col-md-4 control-label" >Contact Name and Title</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="contact_name" datatext="contact_name" placeholder="Contact Name and Title" class="form-control" type="text" id="contact_name">
+    </div>
+  </div>
+  </div>
+  
+  <!-- Text input-->
+       <div class="form-group">
+         <label class="col-md-4 control-label">Remittance Email <i>(Receivable Department or designated person to process card transaction payments)</i></label>  
+  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" datatext="email" placeholder="E-Mail Address" class="form-control"  type="text"id="email">
+    </div>
+  </div>
+  </div>
+  
+  
+  <!-- Text input-->
+       
+  <div class="form-group">
+  <label class="col-md-4 control-label">Phone</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+  <input name="phone" datatext="phone" placeholder="(845) 555-1212" class="form-control" type="text" id="phone">
+    </div>
+  </div>
+  </div>
+  
+  <!-- Text input-->
+      
+  <div class="form-group">
+  <label class="col-md-4 control-label">Remittance Street Address</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="address" datatext="address" placeholder="Address" class="form-control" type="text" id="address">
+    </div>
+  </div>
+  </div>
+  
+  <!-- Text input-->
+  
+  <div class="form-group">
+  <label class="col-md-4 control-label">City/Town</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="city" datatext="city" placeholder="city" class="form-control"  type="text" id="city">
+    </div>
+  </div>
+  </div>
+  
+  <!-- Select Basic -->
+   
+  <div class="form-group"> 
+  <label class="col-md-4 control-label">State/Province</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="state" datatext="state" class="form-control selectpicker" id="state">
+      <option value=" " >Please select your state</option>
+      <option value="" selected="selected">- Select -</option>
+      <option value="Alabama">Alabama</option>
+      <option value="Alaska">Alaska</option>
+      <option value="American Samoa">American Samoa</option>
+      <option value="Arizona">Arizona</option>
+      <option value="Arkansas">Arkansas</option>
+      <option value="Armed Forces (Canada, Europe, Africa, or Middle East)">Armed Forces (Canada, Europe, Africa, or Middle East)</option>
+      <option value="Armed Forces Americas">Armed Forces Americas</option>
+      <option value="Armed Forces Pacific">Armed Forces Pacific</option>
+      <option value="California">California</option>
+      <option value="Colorado">Colorado</option>
+      <option value="Connecticut">Connecticut</option>
+      <option value="Delaware">Delaware</option>
+      <option value="District of Columbia">District of Columbia</option>
+      <option value="Federated States of Micronesia">Federated States of Micronesia</option>
+      <option value="Florida">Florida</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Guam">Guam</option>
+      <option value="Hawaii">Hawaii</option>
+      <option value="Idaho">Idaho</option>
+      <option value="Illinois">Illinois</option>
+      <option value="Indiana">Indiana</option>
+      <option value="Iowa">Iowa</option>
+      <option value="Kansas">Kansas</option>
+      <option value="Kentucky">Kentucky</option>
+      <option value="Louisiana">Louisiana</option>
+      <option value="Maine">Maine</option>
+      <option value="Marshall Islands">Marshall Islands</option>
+      <option value="Maryland">Maryland</option>
+      <option value="Massachusetts">Massachusetts</option>
+      <option value="Michigan">Michigan</option>
+      <option value="Minnesota">Minnesota</option>
+      <option value="Mississippi">Mississippi</option>
+      <option value="Missouri">Missouri</option>
+      <option value="Montana">Montana</option>
+      <option value="Nebraska">Nebraska</option>
+      <option value="Nevada">Nevada</option>
+      <option value="New Hampshire">New Hampshire</option>
+      <option value="New Jersey">New Jersey</option>
+      <option value="New Mexico">New Mexico</option>
+      <option value="New York">New York</option>
+      <option value="North Carolina">North Carolina</option>
+      <option value="North Dakota">North Dakota</option>
+      <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+      <option value="Ohio">Ohio</option>
+      <option value="Oklahoma">Oklahoma</option>
+      <option value="Oregon">Oregon</option>
+      <option value="Palau">Palau</option>
+      <option value="Pennsylvania">Pennsylvania</option>
+      <option value="Puerto Rico">Puerto Rico</option>
+      <option value="Rhode Island">Rhode Island</option>
+      <option value="South Carolina">South Carolina</option>
+      <option value="South Dakota">South Dakota</option>
+      <option value="Tennessee">Tennessee</option>
+      <option value="Texas">Texas</option>
+      <option value="Utah">Utah</option>
+      <option value="Vermont">Vermont</option>
+      <option value="Virgin Islands">Virgin Islands</option>
+      <option value="Virginia">Virginia</option>
+      <option value="Washington">Washington</option>
+      <option value="West Virginia">West Virginia</option>
+      <option value="Wisconsin">Wisconsin</option>
+      <option value="Wyoming">Wyoming</option>
+      <option value="Alberta">Alberta</option>
+      <option value="British Columbia">British Columbia</option>
+      <option value="Manitoba">Manitoba</option>
+      <option value="New Brunswick">New Brunswick</option>
+      <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+      <option value="Nova Scotia">Nova Scotia</option>
+      <option value="Northwest Territories">Northwest Territories</option>
+      <option value="Nunavut">Nunavut</option>
+      <option value="Ontario">Ontario</option>
+      <option value="Prince Edward Island">Prince Edward Island</option>
+      <option value="Quebec">Quebec</option>
+      <option value="Saskatchewan">Saskatchewan</option>
+      <option value="Yukon">Yukon</option>
+    </select>
+  </div>
+  </div>
+  </div>
+  
+  <!-- Text input-->
+  
+  <div class="form-group">
+  <label class="col-md-4 control-label">Zip/Postal Code</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="zip" datatext="zip" placeholder="Zip Code" class="form-control"  type="text" id="zip">
+    </div>
+  </div>
+  </div>
+  
+  <!-- Success message -->
+  <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
+  
+  <!-- Button -->
+  <div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" id="submit" class="btn btn-warning" >Send <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+  </div>
+  
+  </fieldset>
+  </form>
+  </div>
+    </div><!-- /.container -->
+</body>
+<footer>  
+
+</footer>
+
+
+
+</HTML>
