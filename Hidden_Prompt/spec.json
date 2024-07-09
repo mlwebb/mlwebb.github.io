@@ -1,0 +1,27 @@
+{
+	"name": "Hidden_Prompt",
+	"extensions":
+	[
+		{
+			"perspective": "authoring",
+			"features":
+			[
+				{
+					"id": "com.ibm.bi.authoring",
+					"collectionItems":
+					[
+						{
+							"containerId": "com.ibm.bi.authoring.customControls",
+							"id": "hidden_prompt",
+							"label": "Hidden Prompt",
+							"tooltip": "hidden prompt to pass parameters",
+							"icon": "hidden_prompt_icon",
+							"symbols": "v1/ext/Hidden_Prompt/bolt.svg",
+							"designModule": "v1/ext/Hidden_Prompt/designModule.js"
+						}
+					]
+				}
+			]
+		}
+	]
+}
