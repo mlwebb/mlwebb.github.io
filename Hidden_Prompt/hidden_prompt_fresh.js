@@ -10,17 +10,16 @@ define(function () {
   };
   C_HiddenPrompt.prototype.f_submit = function (oControlHost) {
     oControlHost.valueChanged();
-    //oControlHost.next();
+    oControlHost.next();
   };
   C_HiddenPrompt.prototype.setData = function (oControlHost, oDataStore) {
     this.m_oDataStore = oDataStore;
-    console.log(this.m_oDataStore);
   };
   C_HiddenPrompt.prototype.getParameters = function () {
     return [
       {
-        parameter: this.m_sParameterName,
-        values: [{ use: this.m_oDataStore.getCellValue(0, 0) }],
+        "parameter": this.m_sParameterName,
+        "values": [{ "use": this.m_oDataStore.getCellValue(0, 0) }],
       },
     ];
   };
