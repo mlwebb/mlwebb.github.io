@@ -1,44 +1,61 @@
 {
-    "Label": "Popup Label",
-    "Tooltip": "",
-    "Color": "",
-    "Parameters": [
-      {
-        "Parameter_Name": "pBasic_Param1",
-        "dataSetName": {
-          "col_type": "",
-          "col_type_comment": "Use category, value, or measure",
-          "name": "",
-          "column_name": ""
-        }
+  "Label": "Hidden Auto Prompt",
+  "Tooltip": "",
+  "Color": "",
+  "dev_Path": "https://pages.github.com/mlwebb1/mlwebb1.github.io/tree/main/Hidden_Prompt/Hidden_Prompt_fresh.js",
+  "Parameters": [
+    {
+      "Parameter_Name": "pBasic_Param1",
+      "dataSourceType": "dataset",
+      "dataSourceType_comment": "Use static or dataset",
+      "useDataSet": {
+        "col_type": "",
+        "col_type_comment": "Use category, value, or measure",
+        "dataSetName": "",
+        "columnName": "",
+        "isFirstRow": false,
+        "comment": "isFirstRow determines if you just want the value from the first row to be used in parameter"
       },
-      {
-        "Parameter_Name": "p_DateParam",
-        "type": "date",
-        "note": "dates must be in CCYY-MM-DD format",
-        "useColumns": false,
-        "Multiple_Select": true,
-        "dataSourceType": "static",
-        "dataSourceType_comment": "Use static or dataset",
-        "dataSetName": {
-          "col_type": "",
-          "col_type_comment": "Use category, value, or measure",
-          "name": "",
-          "Range": [
-            {
-              "start_columnName": null,
-              "end_columnName": null
-            }
-          ],
-          "Value": { "use_valueName": "", "display_valueName": "" }
-        },
-        "Date_Range": [
+      "defaultValue": {
+        "use_valueName": "",
+        "display_valueName": ""
+      },
+      "defaultValue_comment": "This is a static string value that will set as a default parameter and bypass the dataset logic"
+    },
+    {
+      "Parameter_Name": "p_DateParam",
+      "type": "date",
+      "note": "dates must be in CCYY-MM-DD format",
+      "Multiple_Select": true,
+      "useDataSet": {
+        "col_type": "",
+        "col_type_comment": "Use category, value, or measure",
+        "dataSetName": "",
+        "isFirstRow": false,
+        "comment": "isFirstRow determines if you just want the value from the first row to be used in parameter",
+        "Range": [
           {
-            "start": "1900-01-01",
-            "end": ""
+            "start_columnName": null,
+            "end_columnName": null
           }
         ],
-        "Value": []
-      }
-    ]
-  }
+        "defaultValue": {
+          "use_valueName": "",
+          "display_valueName": ""
+        },
+        "defaultValue_comment": "This is a static string value that will set as a default parameter and bypass the dataset logic"
+      },
+      "Date_Range": [
+        {
+          "start": "1900-01-01",
+          "end": ""
+        }
+      ],
+      "defaultValue": {
+        "use_valueName": "",
+        "display_valueName": ""
+      },
+      "defaultValue_comment": "This is a static string value that will set as a default parameter and bypass the dataset logic"
+    }
+  ]
+}

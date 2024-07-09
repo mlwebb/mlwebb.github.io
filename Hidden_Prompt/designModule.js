@@ -5,38 +5,56 @@ define(() => {
 
     static initialization = {
       configuration: {
-        Label: "Popup Label",
+        Label: "Hidden Auto Prompt",
         Tooltip: "",
         Color: "",
+        dev_Path:
+          "https://pages.github.com/mlwebb1/mlwebb1.github.io/tree/main/Hidden_Prompt/Hidden_Prompt_fresh.js",
         Parameters: [
           {
             Parameter_Name: "pBasic_Param1",
-            dataSetName: {
+            dataSourceType: "dataset",
+            dataSourceType_comment: "Use static or dataset",
+            useDataSet: {
               col_type: "",
               col_type_comment: "Use category, value, or measure",
-              name: "",
-              column_name: "",
+              dataSetName: "",
+              columnName: "",
+              isFirstRow: false,
+              comment:
+                "isFirstRow determines if you just want the value from the first row to be used in parameter",
             },
+            defaultValue: {
+              use_valueName: "",
+              display_valueName: "",
+            },
+            defaultStringValue:
+              "This is a static string value that will set as a default parameter and bypass the dataset logic",
           },
           {
             Parameter_Name: "p_DateParam",
             type: "date",
             note: "dates must be in CCYY-MM-DD format",
-            useColumns: false,
             Multiple_Select: true,
-            dataSourceType: "static",
-            dataSourceType_comment: "Use static or dataset",
-            dataSetName: {
+            useDataSet: {
               col_type: "",
               col_type_comment: "Use category, value, or measure",
-              name: "",
+              dataSetName: "",
+              isFirstRow: false,
+              comment:
+                "isFirstRow determines if you just want the value from the first row to be used in parameter",
               Range: [
                 {
                   start_columnName: null,
                   end_columnName: null,
                 },
               ],
-              Value: { use_valueName: "", display_valueName: "" },
+              defaultValue: {
+                use_valueName: "",
+                display_valueName: "",
+              },
+              defaultStringValue:
+                "This is a static string value that will set as a default parameter and bypass the dataset logic",
             },
             Date_Range: [
               {
@@ -44,7 +62,10 @@ define(() => {
                 end: "",
               },
             ],
-            Value: [],
+            defaultValue: {
+              use_valueName: "",
+              display_valueName: "",
+            },
           },
         ],
       },
@@ -86,8 +107,8 @@ define(() => {
       },
       labels: {
         ccConfiguration: "Options",
-        ccDescription: "Description",
-        ccPath: "",
+        //ccDescription: "Description",
+        ccPath: "File Path",
         // ccHeight:"",
         // ccWidth:"",
         // ccName:""
@@ -95,7 +116,7 @@ define(() => {
       descriptions: {
         ccConfiguration:
           "Configuration JSON to auto fill specific parameters and proceed to Next page without alerting user",
-        ccDescription: "",
+        //ccDescription: "",
         ccPath: "",
         // ccHeight:"",
         // ccWidth:"",
@@ -105,7 +126,7 @@ define(() => {
 
     static dataSets = {
       limits: {
-        max: 0,
+        max: 10,
       },
     };
 
