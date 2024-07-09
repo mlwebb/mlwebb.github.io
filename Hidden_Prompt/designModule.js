@@ -10,6 +10,7 @@ define(() => {
         Color: "",
         dev_Path:
           "https://mlwebb.github.io/Hidden_Prompt/hidden_prompt_fresh.js",
+          Parameter: "p_BasicParam1",
         Parameters: [
           {
             Parameter_Name: "pBasic_Param1",
@@ -70,6 +71,7 @@ define(() => {
         ],
       },
       path: "../v1/ext/Hidden_Prompt/Hidden_Prompt",
+
     };
 
     static configOptions = {
@@ -98,7 +100,7 @@ define(() => {
         show: [
           "ccConfiguration",
           "ccDescription",
-          "UiType",
+          "ccUiType",
           "ccPath",
           // "ccHeight",
           // "ccWidth",
@@ -109,6 +111,7 @@ define(() => {
         ccConfiguration: "Options",
         ccDescription: "Description",
         ccPath: "File Path",
+        ccUiType: "UiType"
         // ccHeight:"",
         // ccWidth:"",
         // ccName:""
@@ -118,6 +121,7 @@ define(() => {
           "Configuration JSON to auto fill specific parameters and proceed to Next page without alerting user",
         ccDescription: "",
         ccPath: "",
+        ccUiType: "UiType"
         // ccHeight:"",
         // ccWidth:"",
         // ccName:""
