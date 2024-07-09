@@ -16,9 +16,10 @@ define( function() {
   C_HiddenPrompt.prototype.setData = function( oControlHost, oDataStore )
   {
       this.m_oDataStore = oDataStore;
+      console.log(oDataStore)
   };
   C_HiddenPrompt.prototype.getParameters = function()
-  {
+  { console.log(oDataStore)
       return [{
           "parameter": this.m_sParameterName,
           "values": [{ "use" : this.m_oDataStore.getCellValue( 0, 0 ) }]

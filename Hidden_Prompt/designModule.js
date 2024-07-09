@@ -100,9 +100,9 @@ define(() => {
           "ccDescription",
           "UiType",
           "ccPath",
-          "ccHeight",
-          "ccWidth",
-          "ccName",
+          // "ccHeight",
+          // "ccWidth",
+          // "ccName",
         ],
       },
       labels: {
