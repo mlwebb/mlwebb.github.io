@@ -9,7 +9,7 @@ define(() => {
         Tooltip: "",
         Color: "",
         dev_Path:
-          "https://pages.github.com/mlwebb1/mlwebb1.github.io/tree/main/Hidden_Prompt/Hidden_Prompt_fresh.js",
+          "https://mlwebb.github.io/Hidden_Prompt/hidden_prompt_fresh.js",
         Parameters: [
           {
             Parameter_Name: "pBasic_Param1",
@@ -107,7 +107,7 @@ define(() => {
       },
       labels: {
         ccConfiguration: "Options",
-        //ccDescription: "Description",
+        ccDescription: "Description",
         ccPath: "File Path",
         // ccHeight:"",
         // ccWidth:"",
@@ -116,7 +116,7 @@ define(() => {
       descriptions: {
         ccConfiguration:
           "Configuration JSON to auto fill specific parameters and proceed to Next page without alerting user",
-        //ccDescription: "",
+        ccDescription: "",
         ccPath: "",
         // ccHeight:"",
         // ccWidth:"",

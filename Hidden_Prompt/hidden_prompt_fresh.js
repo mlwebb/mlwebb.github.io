@@ -5,7 +5,7 @@ define( function() {
   };
   C_HiddenPrompt.prototype.draw = function( oControlHost )
   {
-      this.m_sParameterName = ( oControlHost.configuration && oControlHost.configuration["Parameter name"] ) || "pl";
+      this.m_sParameterName = ( oControlHost.configuration && oControlHost.configuration["Parameter"] ) || "pl";
       setTimeout( this.f_submit.bind( this, oControlHost ), 0 );
   };
   C_HiddenPrompt.prototype.f_submit = function( oControlHost )
