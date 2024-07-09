@@ -27,8 +27,7 @@ define( function() {
 
   C_HiddenPrompt.prototype.getDatastore = function()
   {
-    console.log(this.m_oDataStore.name)
-      return 
+      return console.log(this.m_oDataStore.name)
   };
   return C_HiddenPrompt;
   });

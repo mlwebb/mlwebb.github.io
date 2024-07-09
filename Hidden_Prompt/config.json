@@ -2,7 +2,8 @@
   "Label": "Hidden Auto Prompt",
   "Tooltip": "",
   "Color": "",
-  "dev_Path": "https://pages.github.com/mlwebb1/mlwebb1.github.io/tree/main/Hidden_Prompt/Hidden_Prompt_fresh.js",
+  "dev_Path": "https://mlwebb.github.io/Hidden_Prompt/hidden_prompt_fresh.js",
+  "orig_path":"../v1/ext/Hidden_Prompt/Hidden_Prompt",
   "Parameters": [
     {
       "Parameter_Name": "pBasic_Param1",

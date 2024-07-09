@@ -132,7 +132,7 @@ define(() => {
 
     static toolboxLocation = {
       group: {
-        id: "toolboxPinnedLabel",
+        id: "toolboxLayoutLabel",
         location: "first",
       },
     };
