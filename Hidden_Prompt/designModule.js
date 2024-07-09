@@ -10,7 +10,7 @@ define(() => {
         Color: "",
         dev_Path:
           "https://mlwebb.github.io/Hidden_Prompt/hidden_prompt_fresh.js",
-          Parameter: "p_BasicParam1",
+        Parameter: "pBasic_Param1",
         Parameters: [
           {
             Parameter_Name: "pBasic_Param1",
@@ -71,7 +71,6 @@ define(() => {
         ],
       },
       path: "../v1/ext/Hidden_Prompt/Hidden_Prompt",
-
     };
 
     static configOptions = {
@@ -111,7 +110,7 @@ define(() => {
         ccConfiguration: "Options",
         ccDescription: "Description",
         ccPath: "File Path",
-        ccUiType: "UiType"
+        ccUiType: "UiType",
         // ccHeight:"",
         // ccWidth:"",
         // ccName:""
@@ -120,8 +119,8 @@ define(() => {
         ccConfiguration:
           "Configuration JSON to auto fill specific parameters and proceed to Next page without alerting user",
         ccDescription: "",
-        ccPath: "",
-        ccUiType: "UiType"
+        ccPath: "Find the Path for your js file",
+        ccUiType: "UiType",
         // ccHeight:"",
         // ccWidth:"",
         // ccName:""
@@ -131,6 +130,12 @@ define(() => {
     static dataSets = {
       limits: {
         max: 10,
+      },
+      dropZoneLabels: [{}],
+      allDropZoneVisibility: {
+        categories: true,
+        values: true,
+        defaultMeasure: false,
       },
     };
 
@@ -151,7 +156,7 @@ define(() => {
         ? `<DIV class="clsPopupLabel">${this.f_htmlEncode(oConfig.Label)}</DIV>`
         : "";
       const sIcon = oConfig["SVG Icon"];
-      return `<div class="clsPopup"><div class="clsPopup" style="${sColor}${sPadding}">${sLabel}</div></div>`;
+      return `<div class="clsPopup"><div class="clsPopup" style="${sColor}${sPadding}">${sIcon}${sLabel}</div></div>`;
     }
 
     static drawConfiguration(nCustomControl, sConfiguration) {
