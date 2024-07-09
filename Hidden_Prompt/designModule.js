@@ -58,7 +58,7 @@ define(() => {
           tooltip: "The label to display beside the icon",
         },
         Tooltip: {
-          tooltip: "The tooltip displayed when hvoering over the label or icon",
+          tooltip: "The tooltip displayed when hovering over the label or icon",
         },
         Color: {
           type: "color",
@@ -74,13 +74,32 @@ define(() => {
 
     static properties = {
       visibility: {
-        show: ["ccConfiguration"],
+        show: [
+          "ccConfiguration",
+          "ccDescription",
+          "UiType",
+          "ccPath",
+          "ccHeight",
+          "ccWidth",
+          "ccName",
+        ],
       },
       labels: {
         ccConfiguration: "Options",
+        ccDescription: "Description",
+        ccPath: "",
+        // ccHeight:"",
+        // ccWidth:"",
+        // ccName:""
       },
       descriptions: {
-        ccConfiguration: "Hidden Prompt options",
+        ccConfiguration:
+          "Configuration JSON to auto fill specific parameters and proceed to Next page without alerting user",
+        ccDescription: "",
+        ccPath: "",
+        // ccHeight:"",
+        // ccWidth:"",
+        // ccName:""
       },
     };
 
@@ -92,7 +111,7 @@ define(() => {
 
     static toolboxLocation = {
       group: {
-        id: "toolboxLayoutLabel",
+        id: "toolboxPinnedLabel",
         location: "first",
       },
     };

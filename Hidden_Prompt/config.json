@@ -1,0 +1,44 @@
+{
+    "Label": "Popup Label",
+    "Tooltip": "",
+    "Color": "",
+    "Parameters": [
+      {
+        "Parameter_Name": "pBasic_Param1",
+        "dataSetName": {
+          "col_type": "",
+          "col_type_comment": "Use category, value, or measure",
+          "name": "",
+          "column_name": ""
+        }
+      },
+      {
+        "Parameter_Name": "p_DateParam",
+        "type": "date",
+        "note": "dates must be in CCYY-MM-DD format",
+        "useColumns": false,
+        "Multiple_Select": true,
+        "dataSourceType": "static",
+        "dataSourceType_comment": "Use static or dataset",
+        "dataSetName": {
+          "col_type": "",
+          "col_type_comment": "Use category, value, or measure",
+          "name": "",
+          "Range": [
+            {
+              "start_columnName": null,
+              "end_columnName": null
+            }
+          ],
+          "Value": { "use_valueName": "", "display_valueName": "" }
+        },
+        "Date_Range": [
+          {
+            "start": "1900-01-01",
+            "end": ""
+          }
+        ],
+        "Value": []
+      }
+    ]
+  }
