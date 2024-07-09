@@ -12,7 +12,7 @@ define( function() {
   C_HiddenPrompt.prototype.f_submit = function( oControlHost )
   {
       oControlHost.valueChanged();
-      oControlHost.next();
+      //oControlHost.next();
   };
   C_HiddenPrompt.prototype.setData = function( oControlHost, oDataStore )
   {
