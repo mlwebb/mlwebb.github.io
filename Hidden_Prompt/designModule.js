@@ -156,7 +156,7 @@ define(() => {
         ? `<DIV class="clsPopupLabel">${this.f_htmlEncode(oConfig.Label)}</DIV>`
         : "";
       const sIcon = oConfig["SVG Icon"];
-      return `<div class="clsPopup"><div class="clsPopup" style="${sColor}${sPadding}">${sIcon}${sLabel}</div></div>`;
+      return  `<DETAILS class="clsPopup"><SUMMARY class="clsPopup" style="${sColor}${sPadding}">${sIcon}${sLabel}</SUMMARY></DETAILS>`;
     }
 
     static drawConfiguration(nCustomControl, sConfiguration) {

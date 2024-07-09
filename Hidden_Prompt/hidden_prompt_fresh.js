@@ -19,7 +19,10 @@ define(() => {
       );
       d.querySelector("HEAD").appendChild(v_elLink);
     }
-    initialize = () => C_HiddenPrompt.m_oStyleSheetPromise;
+    initialize (oControlHost, fnDoneInitializing) {
+      C_HiddenPrompt.m_oStyleSheetPromise;
+      fnDoneInitializing();
+    }  
 
     draw(oControlHost) {
       this.m_sParameterName =
@@ -27,9 +30,31 @@ define(() => {
           oControlHost.configuration["Parameter"]) ||
         "pl";
       console.log(oControlHost.getParameter(this.m_sParameterName));
-      oControlHost.container.innerHTML = `<div id="${oControlHost.generateUniqueID()}">${oControlHost.getParameter(
-        this.m_sParameterName
-      )}</div>`;
+      const oConfig = oControlHost.configuration ?? {};
+      const divPopupBlock = oControlHost.container.closest(
+        'DIV[specname="block"]'
+      );
+      if (!divPopupBlock) {
+        throw new scriptableReportError(
+          "Popup",
+          "draw",
+          "The popup control must be located inside the block to popup."
+        );
+      }
+      const elDetails = document.createElement("DETAILS");
+      const sPadding = oConfig.Label ? "" : "padding:0;";
+      const sColor = oConfig.Color ? `color:${oConfig.Color};` : "";
+      const sLabel = oConfig.Label ? '<DIV class="clsPopupLabel"></DIV>' : "";
+      const sIcon = oConfig["SVG Icon"] ?? "";
+      elDetails.innerHTML = `<SUMMARY class="clsPopup" style="${sColor}${sPadding}">${sIcon}${sLabel}</SUMMARY><DIV class="clsDetailPopup"></DIV>`;
+      if (oConfig.Label) {
+        elDetails.querySelector(".clsPopupLabel").textContent = oConfig.Label;
+      }
+      if (oConfig.Tooltip) {
+        elDetails.querySelector("SUMMARY").title = oConfig.Tooltip;
+      }
+      divPopupBlock.replaceWith(elDetails);
+      elDetails.querySelector("DIV.clsDetailPopup").append(divPopupBlock);
 
       setTimeout(() => this.f_submit(oControlHost), 0);
     }
@@ -40,7 +65,9 @@ define(() => {
     }
 
     setData(oControlHost, oDataStore) {
-      this.m_aDataStore[oDataStore.name] = oDataStore;
+      this.m_oDataStore = oDataStore;
+      this.m_aDataStoreName[oDataStore.name] = oDataStore;
+      console.log(this.m_aDataStoreName)
     }
 
     getParameters(oControlHost) {
