@@ -26,9 +26,11 @@ define( function() {
       }];
   };
 
-  C_HiddenPrompt.prototype.getDatastore = function()
+  C_HiddenPrompt.prototype.getDatastore = function(oDataStore)
   {
-      return console.log(this.m_oDataStore.name)
+    if (this.m_oDataStore) {
+      console.log("DatastoreName",this?.m_oDataStore?.name || "none")
+    } 
   };
   return C_HiddenPrompt;
   });
