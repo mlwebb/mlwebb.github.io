@@ -6,7 +6,7 @@ define(function () {
       (oControlHost.configuration && oControlHost.configuration["Parameter"]) ||
       "pl";
     console.log(this.m_sParameterName);
-    setTimeout(this.f_submit.bind(this, oControlHost), 10);
+    setTimeout(this.f_submit.bind(this, oControlHost), 0);
   };
   C_HiddenPrompt.prototype.f_submit = function (oControlHost) {
     oControlHost.valueChanged();
