@@ -6,6 +6,7 @@ define( function() {
   C_HiddenPrompt.prototype.draw = function( oControlHost )
   {
       this.m_sParameterName = ( oControlHost.configuration && oControlHost.configuration["Parameter"] ) || "pl";
+      this.n_ParameterValue = (oControlHost.configuration && oControlHost.configuration["ParameterValue"]) || ""
       setTimeout( this.f_submit.bind( this, oControlHost ), 0 );
   };
   C_HiddenPrompt.prototype.f_submit = function( oControlHost )
@@ -22,7 +23,7 @@ define( function() {
   { console.log(oDataStore)
       return [{
           "parameter": this.m_sParameterName,
-          "values": [{ "use" : oControlHost.configuration["Parameter"] }]
+          "values": [{ "use" : this.m_oDataStore.getCellValue( 0, 0 ) }]
       }];
   };
 
